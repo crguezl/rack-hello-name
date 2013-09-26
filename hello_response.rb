@@ -1,13 +1,11 @@
 # encoding: utf-8
 require 'rack'
-require 'pry-debugger'
 
 class HelloWorld
 
   def call env
     req = Rack::Request.new(env)
     res = Rack::Response.new 
-    binding.pry if ARGV[0]
     res['Content-Type'] = 'text/html'
     name = (req["firstname"] && req["firstname"] != '') ? req["firstname"] :'World'
     res.write <<-"EOS"

@@ -16,7 +16,9 @@ app = lambda do |env|
     body << "Instead of #{req.url} visit something like "+
             "http://localhost:8080/hello?name=Casiano\n"
   end
-  res.headers['Content-Type'] = 'text/plain'
+  res['Content-Type'] = 'text/plain'
+  res["Content-Length"] = body.bytesize.to_s
+  #res["Content-Length"] = Rack::Utils.bytesize(body).to_s
   res.body = [ body ]
   res.finish
 end
